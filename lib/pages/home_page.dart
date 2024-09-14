@@ -17,13 +17,21 @@ class _HomePageState extends State<HomePage> {
   // text controller
   final TextEditingController textController = TextEditingController();
 //open a dialog box to add note
-  void addOrEditNoteBox(String? docId) {
+  void addOrEditNoteBox({String? docId}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: docId == null ? Text("Add note", style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary),) : Text("Edit note", style: TextStyle(
-              color: Theme.of(context).colorScheme.inversePrimary),),
+        title: docId == null
+            ? Text(
+                "Add note",
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary),
+              )
+            : Text(
+                "Edit note",
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.inversePrimary),
+              ),
         content: TextField(
           controller: textController,
         ),
@@ -33,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 "Cancel",
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary),
+                    color: Theme.of(context).colorScheme.inversePrimary),
               )),
           ElevatedButton(
               onPressed: () {
@@ -93,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                 //display as a tile
                 return NotesTile(
                   noteText: noteText,
-                  editNote: () => addOrEditNoteBox(docId),
+                  editNote: () => addOrEditNoteBox(docId: docId),
                   deleteNote: () => fireStoreService.deleteNote((docId)),
                 );
               },
@@ -104,7 +112,7 @@ class _HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => addOrEditNoteBox(null),
+        onPressed: addOrEditNoteBox,
         child: Icon(
           Icons.add,
           color: Theme.of(context).colorScheme.inversePrimary,
