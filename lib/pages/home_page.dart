@@ -93,9 +93,11 @@ class _HomePageState extends State<HomePage> {
                 //get individual doc to display
                 DocumentSnapshot document = notesList[index];
                 String docId = document.id;
-                //get note from each doc
+                //get data from each doc with map type casting
                 Map<String, dynamic> data =
                     document.data() as Map<String, dynamic>;
+
+                //get the note from the data
                 String noteText = data["note"];
 
                 //display as a tile
